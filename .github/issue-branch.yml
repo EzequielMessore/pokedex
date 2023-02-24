@@ -1,0 +1,17 @@
+silent: true
+branchName: '${issue.title,}'
+autoCloseIssue: true
+defaultBranch: 'main'
+gitSafeReplacementChar: '-'
+branches:
+  - label: feature
+    name: main
+    prefix: feature/
+  - label: bug
+    name: main
+    prefix: fix/
+openPR: true
+copyIssueDescriptionToPR: true
+copyIssueLabelsToPR: true
+copyIssueAssigneeToPR: true
+commentMessage: 'Branch `${branchName}` created'
