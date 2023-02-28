@@ -22,5 +22,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "pokédex"
 include(
-    ":app"
+    ":app",
+    ":features:pokelist",
 )
