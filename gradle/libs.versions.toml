@@ -10,6 +10,9 @@ androidxLifecycleRuntimeKtx = "2.5.1"
 composeBom = "2023.01.00"
 composeCompiler = "1.4.0"
 
+# Coil
+coil = "2.2.2"
+
 # Testing
 junitExt = "1.1.5"
 expresso = "3.5.1"
@@ -28,6 +31,9 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+
+# Coil
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 # Testing
 testing-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

@@ -45,6 +45,8 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
+    implementation(libs.coil)
+
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
 
