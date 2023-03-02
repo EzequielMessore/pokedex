@@ -1,25 +1,22 @@
 package br.com.messore.tech.pokedex.pokelist
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.AssistChip
-import androidx.compose.material3.AssistChipDefaults
-import androidx.compose.material3.ChipBorder
-import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -27,25 +24,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 
 @Composable
 @ExperimentalMaterial3Api
 fun PokeListScreen() {
     val pokemonTypes = listOf(
-        PokemonType(
+        Pokemon.Type(
             text = "Grama",
             color = Color(0xff63bc5a),
             iconResource = R.drawable.ic_type_grass,
         ),
-        PokemonType(
+        Pokemon.Type(
             text = "Venenoso",
             color = Color(0xffb567ce),
             iconResource = R.drawable.ic_type_poison,
@@ -85,31 +83,7 @@ fun PokeListScreen() {
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 items(pokemonTypes) { pokemonType ->
-                    AssistChip(
-                        modifier = Modifier.padding(0.dp),
-                        onClick = { /* Do something! */ },
-                        label = { Text(pokemonType.text, style = TextStyle(fontSize = 11.sp)) },
-                        leadingIcon = {
-                            Box(
-                                modifier = Modifier
-                                    .size(20.dp)
-                                    .background(color = Color.White, shape = CircleShape),
-                            ) {
-                                Icon(
-                                    painterResource(pokemonType.iconResource),
-                                    contentDescription = null,
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(4.dp)
-                                        .align(Alignment.Center),
-                                    tint = pokemonType.color,
-                                )
-                            }
-                        },
-                        colors = AssistChipDefaults.assistChipColors(containerColor = pokemonType.color),
-                        shape = RoundedCornerShape(48.dp),
-                        border = null,
-                    )
+                    PokeType(pokemonType)
                 }
             }
         }
@@ -118,9 +92,72 @@ fun PokeListScreen() {
                 .aspectRatio(1.24f)
                 .background(color = Color(0xff63bc5a), shape = RoundedCornerShape(15.dp)),
         ) {
-            //
+            PokeImage(
+                type = pokemonTypes.first(),
+                modifier = Modifier
+                    .align(alignment = Alignment.Center)
+                    .padding(4.dp)
+            )
         }
     }
+}
+
+@Composable
+fun PokeType(pokemonType: Pokemon.Type) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .background(
+                color = pokemonType.color,
+                shape = RoundedCornerShape(15.dp),
+            )
+            .padding(horizontal = 6.dp, vertical = 3.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .size(20.dp)
+                .background(color = Color.White, shape = CircleShape),
+        ) {
+            Icon(
+                painter = painterResource(pokemonType.iconResource),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(4.dp)
+                    .align(Alignment.Center),
+                tint = pokemonType.color,
+            )
+        }
+        Spacer(modifier = Modifier.width(6.dp))
+        Text(text = pokemonType.text, color = Color.Black, fontSize = 11.sp)
+    }
+}
+
+@Composable
+fun PokeImage(type: Pokemon.Type, modifier: Modifier) {
+    Image(
+        modifier = modifier.fillMaxSize(),
+        painter = painterResource(type.iconResource),
+        contentDescription = null,
+    )
+    Box(
+        modifier = modifier
+            .aspectRatio(1f)
+            .background(brush = Brush.linearGradient(listOf(Color.Transparent, type.color))),
+    )
+    AsyncImage(
+        modifier = modifier.fillMaxSize(),
+        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+        contentDescription = null,
+    )
+}
+
+class Pokemon {
+    data class Type(
+        val text: String,
+        val color: Color,
+        val iconResource: Int,
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -129,9 +166,3 @@ fun PokeListScreen() {
 fun DefaultPreview() {
     PokeListScreen()
 }
-
-data class PokemonType(
-    val text: String,
-    val color: Color,
-    val iconResource: Int,
-)
