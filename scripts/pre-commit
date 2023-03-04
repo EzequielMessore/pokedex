@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+git diff --name-only --staged \
+    | grep "\.kts\?$" \
+    | paste -sd , - \
+    | sed -e 's/^/-Psource=/' \
+    | xargs -r ./gradlew detekt
