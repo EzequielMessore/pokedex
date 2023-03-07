@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -49,6 +50,29 @@ fun PokeListScreen() {
             iconResource = R.drawable.ic_type_poison,
         ),
     )
+    val bulbasaur = Pokemon(
+        1,
+        "Bulbasaur",
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+        pokemonTypes,
+    )
+    val ivysaur = Pokemon(
+        2,
+        "Ivysaur",
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+        pokemonTypes,
+    )
+    val pokemonList = listOf(bulbasaur,ivysaur)
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        items(pokemonList) {pokemon->
+            PokeItem(pokemon)
+        }
+    }
+
+}
+
+@Composable
+fun PokeItem(pokemon:Pokemon) {
     Row(
         modifier = Modifier
             .aspectRatio(3.22f)
@@ -64,7 +88,7 @@ fun PokeListScreen() {
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = "Nº001",
+                text = "Nº${pokemon.id.toString().padStart(3,'0')}",
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.W600,
@@ -72,7 +96,7 @@ fun PokeListScreen() {
                 ),
             )
             Text(
-                text = "Bulbasaur",
+                text = pokemon.name,
                 style = TextStyle(
                     fontSize = 21.sp,
                     fontWeight = FontWeight.W600,
@@ -82,7 +106,7 @@ fun PokeListScreen() {
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                items(pokemonTypes) { pokemonType ->
+                items(pokemon.types) { pokemonType ->
                     PokeType(pokemonType)
                 }
             }
@@ -93,7 +117,7 @@ fun PokeListScreen() {
                 .background(color = Color(0xff63bc5a), shape = RoundedCornerShape(15.dp)),
         ) {
             PokeImage(
-                type = pokemonTypes.first(),
+                pokemon = pokemon,
                 modifier = Modifier
                     .align(alignment = Alignment.Center)
                     .padding(4.dp)
@@ -105,8 +129,7 @@ fun PokeListScreen() {
 @Composable
 fun PokeType(pokemonType: Pokemon.Type) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
+        verticalAlignment = Alignment.CenterVertically, modifier = Modifier
             .background(
                 color = pokemonType.color,
                 shape = RoundedCornerShape(15.dp),
@@ -134,25 +157,34 @@ fun PokeType(pokemonType: Pokemon.Type) {
 }
 
 @Composable
-fun PokeImage(type: Pokemon.Type, modifier: Modifier) {
+fun PokeImage(pokemon: Pokemon, modifier: Modifier) {
     Image(
         modifier = modifier.fillMaxSize(),
-        painter = painterResource(type.iconResource),
+        painter = painterResource(pokemon.mainType.iconResource),
         contentDescription = null,
     )
     Box(
         modifier = modifier
             .aspectRatio(1f)
-            .background(brush = Brush.linearGradient(listOf(Color.Transparent, type.color))),
+            .background(brush = Brush.linearGradient(listOf(Color.Transparent, pokemon.mainType.color))),
     )
     AsyncImage(
         modifier = modifier.fillMaxSize(),
-        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+        model = pokemon.image,
         contentDescription = null,
     )
 }
 
-class Pokemon {
+typealias Url = String
+
+data class Pokemon(
+    val id: Int,
+    val name: String,
+    val image: Url,
+    val types: List<Type>,
+) {
+    val mainType: Type = types.first()
+
     data class Type(
         val text: String,
         val color: Color,
