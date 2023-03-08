@@ -10,6 +10,8 @@ androidxLifecycleRuntimeKtx = "2.5.1"
 composeBom = "2023.01.00"
 composeCompiler = "1.4.0"
 
+detekt = "1.22.0"
+
 # Testing
 junitExt = "1.1.5"
 expresso = "3.5.1"
@@ -29,6 +31,9 @@ compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
+# Detekt
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
 # Testing
 testing-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 testing-junit-ext = { module = "androidx.test.ext:junit", version.ref = "junitExt" }
@@ -36,6 +41,7 @@ testing-espresso = { module = "androidx.test.espresso:espresso-core", version.re
 testing-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref ="testingCompose" }
 
 [plugins]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [bundles]
 compose = ["compose-activity", "compose-ui", "compose-ui-tooling-preview", "compose-material3"]
