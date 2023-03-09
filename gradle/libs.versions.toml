@@ -13,6 +13,8 @@ composeCompiler = "1.4.0"
 # Coil
 coil = "2.2.2"
 
+detekt = "1.22.0"
+
 # Testing
 junitExt = "1.1.5"
 expresso = "3.5.1"
@@ -35,13 +37,17 @@ compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 # Coil
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
+# Detekt
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
 # Testing
 testing-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 testing-junit-ext = { module = "androidx.test.ext:junit", version.ref = "junitExt" }
 testing-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "expresso" }
-testing-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref ="testingCompose" }
+testing-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "testingCompose" }
 
 [plugins]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [bundles]
 compose = ["compose-activity", "compose-ui", "compose-ui-tooling-preview", "compose-material3"]

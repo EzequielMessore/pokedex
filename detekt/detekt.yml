@@ -1,0 +1,272 @@
+build:
+  maxIssues: 0
+
+config:
+  validation: true
+  excludes: "forbidden"
+
+complexity:
+  active: true
+  ComplexCondition:
+    threshold: 3
+  ComplexMethod:
+    threshold: 10
+  LargeClass:
+    threshold: 150
+  LongMethod:
+    threshold: 20
+  LongParameterList:
+    functionThreshold: 5
+  TooManyFunctions:
+    active: true
+    thresholdInFiles: 75
+    thresholdInClasses: 50
+    thresholdInInterfaces: 50
+    thresholdInObjects: 50
+    thresholdInEnums: 10
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
+
+coroutines:
+  active: true
+  GlobalCoroutineUsage:
+    active: true
+  RedundantSuspendModifier:
+    active: true
+
+forbidden:
+  active: true
+  UndocumentedConstructorArgument:
+    active: true
+    requireDoc: false
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
+  UndocumentedFunctionArgument:
+    active: true
+    requireDoc: false
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
+
+performance:
+  active: true
+  ArrayPrimitive:
+    active: true
+  ForEachOnRange:
+    active: true
+  UnnecessaryTemporaryInstantiation:
+    active: true
+
+potential-bugs:
+  active: true
+  Deprecation:
+    active: true
+  DuplicateCaseInWhenExpression:
+    active: true
+  EqualsAlwaysReturnsTrueOrFalse:
+    active: true
+  EqualsWithHashCodeExist:
+    active: true
+  ExplicitGarbageCollectionCall:
+    active: true
+  HasPlatformType:
+    active: true
+  IgnoredReturnValue:
+    active: true
+  ImplicitDefaultLocale:
+    active: true
+  ImplicitUnitReturnType:
+    active: true
+  InvalidRange:
+    active: true
+  IteratorHasNextCallsNextMethod:
+    active: true
+  IteratorNotThrowingNoSuchElementException:
+    active: true
+  MapGetWithNotNullAssertionOperator:
+    active: true
+  MissingWhenCase:
+    active: true
+  NullableToStringCall:
+    active: true
+  RedundantElseInWhen:
+    active: true
+  UnconditionalJumpStatementInLoop:
+    active: true
+  UnnecessaryNotNullOperator:
+    active: true
+  UnnecessarySafeCall:
+    active: true
+  UnreachableCode:
+    active: true
+  UnsafeCallOnNullableType:
+    active: true
+  UnsafeCast:
+    active: true
+  UselessPostfixExpression:
+    active: true
+  WrongEqualsTypeParameter:
+    active: true
+
+style:
+  active: true
+  ForbiddenComment:
+    active: true
+  ForbiddenVoid:
+    active: true
+  FunctionOnlyReturningConstant:
+    active: true
+  MandatoryBracesLoops:
+    active: true
+  MaxLineLength:
+    active: true
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
+  MayBeConst:
+    active: true
+  ModifierOrder:
+    active: true
+  NoTabs:
+    active: true
+  OptionalAbstractKeyword:
+    active: true
+  OptionalUnit:
+    active: true
+    excludes: "**/src/test/java/**, **/src/test/kotlin/**"
+  PreferToOverPairSyntax:
+    active: true
+  RedundantExplicitType:
+    active: true
+  RedundantVisibilityModifierRule:
+    active: true
+  SafeCast:
+    active: true
+  SpacingBetweenPackageAndImports:
+    active: true
+  TrailingWhitespace:
+    active: true
+  UnnecessaryAbstractClass:
+    active: true
+  UnnecessaryApply:
+    active: true
+  UnnecessaryInheritance:
+    active: true
+  UnnecessaryLet:
+    active: true
+  UntilInsteadOfRangeTo:
+    active: true
+  UnusedPrivateClass:
+    active: true
+  UnusedPrivateMember:
+    active: true
+    ignoreAnnotated: [ "Preview" ]
+  UseArrayLiteralsInAnnotations:
+    active: true
+  UseCheckOrError:
+    active: true
+  UseDataClass:
+    active: true
+  UseEmptyCounterpart:
+    active: true
+  UseRequire:
+    active: true
+  UselessCallOnNotNull:
+    active: true
+  UtilityClassWithPublicConstructor:
+    active: true
+  VarCouldBeVal:
+    active: true
+  ReturnCount:
+    # This rule seems to fight early returns -> Disabled
+    active: false
+
+naming:
+  FunctionNaming:
+    active: true
+    ignoreAnnotated:
+      - 'Compose'
+    functionPattern: '[a-zA-Z][a-zA-Z0-9]*'
+    excludes: [ '**/test/**', '**/androidTest/**' ]
+
+formatting:
+  active: true
+  AnnotationOnSeparateLine:
+    active: true
+  ChainWrapping:
+    active: true
+  CommentSpacing:
+    active: true
+  EnumEntryNameCase:
+    active: true
+  Filename:
+    active: true
+  FinalNewline:
+    active: true
+    autoCorrect: true
+  ImportOrdering:
+    active: true
+    autoCorrect: true
+  Indentation:
+    active: true
+    autoCorrect: true
+  ModifierOrdering:
+    active: true
+  MultiLineIfElse:
+    active: true
+  NoBlankLineBeforeRbrace:
+    active: true
+    autoCorrect: true
+  NoConsecutiveBlankLines:
+    active: true
+    autoCorrect: true
+  NoEmptyClassBody:
+    active: true
+  NoEmptyFirstLineInMethodBlock:
+    active: true
+  NoLineBreakAfterElse:
+    active: true
+  NoLineBreakBeforeAssignment:
+    active: true
+  NoMultipleSpaces:
+    active: true
+  NoSemicolons:
+    active: true
+  NoTrailingSpaces:
+    active: true
+    autoCorrect: true
+  NoUnitReturn:
+    active: true
+  NoUnusedImports:
+    active: true
+    autoCorrect: true
+  NoWildcardImports:
+    active: true
+  PackageName:
+    active: true
+  ParameterListWrapping:
+    active: true
+  SpacingAroundComma:
+    active: true
+    autoCorrect: true
+  SpacingAroundCurly:
+    active: true
+    autoCorrect: true
+  SpacingAroundDot:
+    active: true
+    autoCorrect: true
+  SpacingAroundDoubleColon:
+    active: true
+    autoCorrect: true
+  SpacingAroundKeyword:
+    active: true
+    autoCorrect: true
+  SpacingAroundOperators:
+    active: true
+    autoCorrect: true
+  SpacingAroundParens:
+    active: true
+    autoCorrect: true
+  SpacingAroundRangeOperator:
+    active: true
+  SpacingBetweenDeclarationsWithAnnotations:
+    active: true
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
+  SpacingBetweenDeclarationsWithComments:
+    active: true
+  StringTemplate:
+    active: true
