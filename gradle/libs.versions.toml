@@ -9,6 +9,7 @@ androidxLifecycleRuntimeKtx = "2.6.0"
 # Compose
 composeBom = "2023.01.00"
 composeCompiler = "1.4.0"
+composeNavigation = "2.5.3"
 
 # Coil
 coil = "2.2.2"
@@ -33,6 +34,7 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 
 # Coil
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
@@ -50,5 +52,5 @@ testing-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref =
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [bundles]
-compose = ["compose-activity", "compose-ui", "compose-ui-tooling-preview", "compose-material3"]
+compose = ["compose-activity", "compose-ui", "compose-ui-tooling-preview", "compose-material3", "compose-navigation"]
 debug-compose = ["compose-ui-tooling", "compose-ui-test-manifest"]
