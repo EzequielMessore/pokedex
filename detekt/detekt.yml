@@ -24,7 +24,7 @@ complexity:
     thresholdInInterfaces: 50
     thresholdInObjects: 50
     thresholdInEnums: 10
-    excludes: ["**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**"]
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
 
 coroutines:
   active: true
@@ -38,11 +38,11 @@ forbidden:
   UndocumentedConstructorArgument:
     active: true
     requireDoc: false
-    excludes: ["**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**"]
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
   UndocumentedFunctionArgument:
     active: true
     requireDoc: false
-    excludes: ["**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**"]
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
 
 performance:
   active: true
@@ -116,7 +116,7 @@ style:
     active: true
   MaxLineLength:
     active: true
-    excludes: ["**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**"]
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
   MayBeConst:
     active: true
   ModifierOrder:
@@ -154,7 +154,7 @@ style:
     active: true
   UnusedPrivateMember:
     active: true
-    ignoreAnnotated: ["Preview"]
+    ignoreAnnotated: [ "Preview" ]
   UseArrayLiteralsInAnnotations:
     active: true
   UseCheckOrError:
@@ -181,7 +181,7 @@ naming:
     ignoreAnnotated:
       - 'Compose'
     functionPattern: '[a-zA-Z][a-zA-Z0-9]*'
-    excludes: ['**/test/**', '**/androidTest/**']
+    excludes: [ '**/test/**', '**/androidTest/**' ]
 
 formatting:
   active: true
@@ -265,7 +265,7 @@ formatting:
     active: true
   SpacingBetweenDeclarationsWithAnnotations:
     active: true
-    excludes: ["**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**"]
+    excludes: [ "**/src/androidTest*/java/**", "**/src/test/java/**", "**/src/androidTest*/kotlin/**", "**/src/test/kotlin/**" ]
   SpacingBetweenDeclarationsWithComments:
     active: true
   StringTemplate:

@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.messore.tech.pokedex.R
+import br.com.messore.tech.pokedex.pokelist.PokeListScreen
 
 @Composable
 fun AppNavHost(
@@ -24,11 +25,7 @@ fun AppNavHost(
         startDestination = startDestination,
     ) {
         composable(BottomNavItem.Pokedex.route) {
-            Box(
-                modifier = Modifier
-                    .background(colorResource(id = R.color.teal_700))
-                    .fillMaxSize()
-            )
+            PokeListScreen()
         }
 
         composable(BottomNavItem.Regions.route) {

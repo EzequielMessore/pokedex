@@ -1,15 +1,18 @@
 [versions]
 # Kotlin
-kotlin = "1.8.0"
+kotlin = "1.8.10"
 
 # AndroidX
 androidxCore = "1.9.0"
-androidxLifecycleRuntimeKtx = "2.5.1"
+androidxLifecycleRuntimeKtx = "2.6.0"
 
 # Compose
 composeBom = "2023.01.00"
 composeCompiler = "1.4.0"
 composeNavigation = "2.5.3"
+
+# Coil
+coil = "2.2.2"
 
 detekt = "1.22.0"
 
@@ -33,6 +36,9 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 
+# Coil
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
 # Detekt
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
@@ -40,7 +46,7 @@ detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", 
 testing-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 testing-junit-ext = { module = "androidx.test.ext:junit", version.ref = "junitExt" }
 testing-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "expresso" }
-testing-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref ="testingCompose" }
+testing-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "testingCompose" }
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
