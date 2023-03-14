@@ -14,7 +14,11 @@ composeNavigation = "2.5.3"
 # Coil
 coil = "2.2.2"
 
+# Detekt
 detekt = "1.22.0"
+
+# Dagger
+dagger = "2.45"
 
 # Testing
 junitExt = "1.1.5"
@@ -41,6 +45,14 @@ coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 # Detekt
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
+# Hilt
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
+
+#Dagger
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger"}
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger"}
 
 # Testing
 testing-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
