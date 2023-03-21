@@ -55,13 +55,13 @@ hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
 
 # Dagger
-dagger = { module = "com.google.dagger:dagger", version.ref = "dagger"}
-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger"}
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
 # Squareup
-squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "squareup"}
-squareup-gson-converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "squareup"}
-squareup-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor"}
+squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "squareup" }
+squareup-gson-converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "squareup" }
+squareup-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 
 # Testing
 testing-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -71,6 +71,7 @@ testing-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref =
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 
 [bundles]
 compose = ["compose-activity", "compose-ui", "compose-ui-tooling-preview", "compose-material3", "compose-navigation"]

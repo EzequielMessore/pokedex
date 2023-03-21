@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -31,12 +34,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     buildFeatures {
@@ -55,7 +58,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":data:network"))
     implementation(project(":features:pokelist"))
+
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime.ktx)
