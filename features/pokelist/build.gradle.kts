@@ -46,8 +46,8 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     implementation(libs.androidx.core)
