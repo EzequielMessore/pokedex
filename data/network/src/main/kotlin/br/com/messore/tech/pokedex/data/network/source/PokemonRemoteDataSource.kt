@@ -19,8 +19,7 @@ class PokemonRemoteDataSource @Inject constructor(
             query = buildGraphQLQuery(PAGE_SIZE, PAGE_SIZE * page),
             operationName = OPERATION_NAME,
         )
-        // todo check with @pedrox-hs
-        return service.post("https://beta.pokeapi.co/graphql/v1beta", request).toDomain()
+        return service.post(request).toDomain()
     }
 
     private fun buildGraphQLQuery(limit: Int, offset: Int) =

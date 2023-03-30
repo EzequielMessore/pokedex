@@ -2,6 +2,7 @@ package br.com.messore.tech.pokedex.pokelist.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.messore.tech.pokedex.domain.model.Pokemon
 import br.com.messore.tech.pokedex.domain.usecase.ListPokemonsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,8 +23,8 @@ class PokemonViewModel @Inject constructor(
         getPokemons()
     }
 
-    private val _state = MutableStateFlow("")
-    val state: StateFlow<String> = _state
+    private val _state = MutableStateFlow(listOf<Pokemon>())
+    val state: StateFlow<List<Pokemon>> = _state
 
     private val _action = MutableSharedFlow<String>()
     val action: SharedFlow<String> = _action
@@ -35,6 +36,7 @@ class PokemonViewModel @Inject constructor(
             }
         }.onSuccess {
             println(it)
+            _state.value = it
         }.onFailure {
             it.printStackTrace()
         }

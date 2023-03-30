@@ -1,11 +1,11 @@
 package br.com.messore.tech.pokedex.data.network.mapper
 
-import br.com.messore.tech.pokedex.data.network.service.TestResponse
-import br.com.messore.tech.pokedex.data.network.service.TypeElement
+import br.com.messore.tech.pokedex.data.network.model.PokemonResponse
+import br.com.messore.tech.pokedex.data.network.model.TypeElement
 import br.com.messore.tech.pokedex.domain.model.Pokemon as PokemonDomain
 import br.com.messore.tech.pokedex.domain.model.Type as TypeDomain
 
-fun TestResponse.toDomain(): List<PokemonDomain> {
+fun PokemonResponse.toDomain(): List<PokemonDomain> {
     return this.data.pokemon.map { pokemon ->
         PokemonDomain(
             id = pokemon.id,
