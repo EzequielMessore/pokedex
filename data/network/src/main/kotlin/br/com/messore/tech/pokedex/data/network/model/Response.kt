@@ -1,4 +1,4 @@
-package br.com.messore.tech.pokedex.network.model
+package br.com.messore.tech.pokedex.data.network.model
 
 data class Response<T>(
     val count: Int,

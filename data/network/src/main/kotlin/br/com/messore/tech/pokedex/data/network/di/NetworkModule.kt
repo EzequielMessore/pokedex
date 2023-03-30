@@ -1,6 +1,6 @@
-package br.com.messore.tech.pokedex.network.di
+package br.com.messore.tech.pokedex.data.network.di
 
-import br.com.messore.tech.pokedex.network.extensions.addInterceptors
+import br.com.messore.tech.pokedex.data.network.extensions.addInterceptors
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module(includes = [ServiceModules::class])
+@Module(includes = [ServiceModules::class, RemoteModule::class])
 class NetworkModule {
     private val url = "https://pokeapi.co/api/v2/"
 

@@ -1,4 +1,4 @@
-package br.com.messore.tech.pokedex.network.extensions
+package br.com.messore.tech.pokedex.data.network.extensions
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

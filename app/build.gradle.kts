@@ -58,6 +58,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data:data"))
     implementation(project(":data:network"))
     implementation(project(":features:pokelist"))
 

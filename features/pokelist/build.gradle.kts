@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+
+    kotlin("kapt")
 }
 
 android {
@@ -42,6 +44,12 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 

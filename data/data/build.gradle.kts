@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm")
+
     kotlin("kapt")
 }
 
@@ -10,10 +11,8 @@ java {
 }
 
 dependencies {
-    implementation(project(":data:data"))
     implementation(project(":domain"))
 
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
-    implementation(libs.bundles.network)
 }
