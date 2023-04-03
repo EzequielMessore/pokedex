@@ -19,7 +19,7 @@ detekt = "1.22.0"
 # Testing
 junitExt = "1.1.5"
 expresso = "3.5.1"
-testingCompose = "1.3.3"
+testingCompose = "1.4.0"
 
 [libraries]
 # AndroidX
