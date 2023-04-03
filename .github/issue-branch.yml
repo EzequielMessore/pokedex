@@ -10,7 +10,7 @@ branches:
   - label: bug
     name: main
     prefix: fix/
-openPR: true
+openDraftPR: true
 copyIssueDescriptionToPR: true
 copyIssueLabelsToPR: true
 copyIssueAssigneeToPR: true
