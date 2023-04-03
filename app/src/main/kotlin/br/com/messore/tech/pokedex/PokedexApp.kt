@@ -13,7 +13,7 @@ import br.com.messore.tech.pokedex.ui.theme.PokedexTheme
 
 @Composable
 fun PokedexApp() {
-    PokedexTheme {
+    PokedexTheme(darkTheme = false) {
         val navController = rememberNavController()
 
         Scaffold(

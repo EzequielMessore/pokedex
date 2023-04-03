@@ -185,6 +185,7 @@ naming:
 
 formatting:
   active: true
+  autoCorrect: true
   AnnotationOnSeparateLine:
     active: true
   ChainWrapping:
