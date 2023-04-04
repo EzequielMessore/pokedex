@@ -3,5 +3,5 @@
 git diff --name-only --staged \
     | grep "\.kts\?$" \
     | paste -sd , - \
-    | sed -e 's/^/-Psource=/' \
+    | sed -E 's/^(.+)$/-Psource=\1/' \
     | xargs -r ./gradlew detekt
