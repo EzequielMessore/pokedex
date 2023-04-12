@@ -8,7 +8,7 @@ class ListPokemonsUseCase @Inject constructor(
     private val repository: PokemonRepository
 ) {
 
-    suspend operator fun invoke(): List<Pokemon> {
-        return repository.getPokemons()
+    suspend operator fun invoke(page: Int, pageSize: Int): List<Pokemon> {
+        return repository.getPokemons(page, pageSize)
     }
 }
