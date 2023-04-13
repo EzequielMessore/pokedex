@@ -7,16 +7,15 @@ import br.com.messore.tech.pokedex.data.network.service.PokemonService
 import br.com.messore.tech.pokedex.domain.model.Pokemon
 import javax.inject.Inject
 
-private const val PAGE_SIZE = 10
 private const val OPERATION_NAME = "pokemonsWithTypes"
 
 class PokemonRemoteDataSource @Inject constructor(
     private val service: PokemonService
 ) : PokemonDataSource.Remote {
 
-    override suspend fun getPokemons(page: Int): List<Pokemon> {
+    override suspend fun getPokemons(page: Int, pageSize: Int): List<Pokemon> {
         val request = GraphQLRequest(
-            query = buildGraphQLQuery(PAGE_SIZE, PAGE_SIZE * page),
+            query = buildGraphQLQuery(pageSize, pageSize * page),
             operationName = OPERATION_NAME,
         )
         return service.post(request).toDomain()

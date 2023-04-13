@@ -15,8 +15,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -24,7 +26,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -39,34 +41,62 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.messore.tech.pokedex.pokelist.model.Pokemon
+import br.com.messore.tech.pokedex.pokelist.model.PokemonType
 import coil.compose.AsyncImage
 
 @Composable
-@ExperimentalMaterial3Api
-fun PokeListScreen(pokemonList: List<Pokemon> = listOf()) {
+fun PokeListScreen(
+    paging: Boolean = false,
+    loading: Boolean = false,
+    pokemonList: List<Pokemon> = listOf(),
+    listState: LazyListState = rememberLazyListState(),
+) {
+    ScreenLoading(show = loading)
+
     Column {
         Search()
 
         Filters()
 
         LazyColumn(
+            state = listState,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(pokemonList) { pokemon ->
                 PokeItem(pokemon)
             }
+
+            item {
+                ScreenLoading(show = paging)
+            }
         }
     }
 }
 
 @Composable
-@ExperimentalMaterial3Api
+fun ScreenLoading(show: Boolean = false) {
+    if (show) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .background(Color.White),
+            contentAlignment = Alignment.Center,
+        ) {
+            CircularProgressIndicator()
+        }
+    }
+}
+
+@Composable
 fun Search() {
     var text by rememberSaveable { mutableStateOf("") }
 
@@ -159,7 +189,7 @@ fun PokeItem(pokemon: Pokemon) {
         Box(
             modifier = Modifier
                 .aspectRatio(1.24f)
-                .background(color = Color(0xff63bc5a), shape = RoundedCornerShape(15.dp)),
+                .background(color = pokemon.mainType.color, shape = RoundedCornerShape(15.dp)),
         ) {
             PokeImage(
                 pokemon = pokemon,
@@ -172,7 +202,7 @@ fun PokeItem(pokemon: Pokemon) {
 }
 
 @Composable
-fun PokeType(pokemonType: Pokemon.Type) {
+fun PokeType(pokemonType: PokemonType) {
     Row(
         verticalAlignment = Alignment.CenterVertically, modifier = Modifier
             .background(
@@ -197,14 +227,14 @@ fun PokeType(pokemonType: Pokemon.Type) {
             )
         }
         Spacer(modifier = Modifier.width(6.dp))
-        Text(text = pokemonType.text, color = Color.Black, fontSize = 11.sp)
+        Text(text = stringResource(id = pokemonType.text), color = Color.Black, fontSize = 11.sp)
     }
 }
 
 @Composable
 fun PokeImage(pokemon: Pokemon, modifier: Modifier) {
     Image(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.size(94.dp),
         painter = painterResource(pokemon.mainType.iconResource),
         contentDescription = null,
     )
@@ -220,24 +250,6 @@ fun PokeImage(pokemon: Pokemon, modifier: Modifier) {
     )
 }
 
-typealias Url = String
-
-data class Pokemon(
-    val id: Int,
-    val name: String,
-    val image: Url,
-    val types: List<Type>,
-) {
-    val mainType: Type = types.first()
-
-    data class Type(
-        val text: String,
-        val color: Color,
-        val iconResource: Int,
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview(showBackground = true)
 fun DefaultPreview() {
@@ -246,22 +258,14 @@ fun DefaultPreview() {
             .fillMaxSize()
             .background(Color.White)
     ) {
-        PokeListScreen(createMock())
+        PokeListScreen(pokemonList = createMock())
     }
 }
 
 private fun createMock(): List<Pokemon> {
     val pokemonTypes = listOf(
-        Pokemon.Type(
-            text = "Grama",
-            color = Color(0xff63bc5a),
-            iconResource = R.drawable.ic_type_grass,
-        ),
-        Pokemon.Type(
-            text = "Venenoso",
-            color = Color(0xffb567ce),
-            iconResource = R.drawable.ic_type_poison,
-        ),
+        PokemonType.Grass,
+        PokemonType.Poison,
     )
     val bulbasaur = Pokemon(
         1,

@@ -1,44 +1,60 @@
 package br.com.messore.tech.pokedex.pokelist.viewmodel
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.messore.tech.pokedex.domain.model.Pokemon
 import br.com.messore.tech.pokedex.domain.usecase.ListPokemonsUseCase
+import br.com.messore.tech.pokedex.pokelist.BaseViewModel
+import br.com.messore.tech.pokedex.pokelist.mapper.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+private const val PAGE_SIZE = 20
+
 @HiltViewModel
 class PokemonViewModel @Inject constructor(
     private val listPokemonsUseCase: ListPokemonsUseCase
-) : ViewModel() {
+) : BaseViewModel<PokemonUiState, PokemonUiAction>(PokemonUiState()) {
+
+    private var page = 0
+    private var isIdle = true
 
     init {
         getPokemons()
     }
 
-    private val _state = MutableStateFlow(listOf<Pokemon>())
-    val state: StateFlow<List<Pokemon>> = _state
+    fun getPokemons() = viewModelScope.launch {
+        if (isIdle.not()) return@launch
+        isIdle = false
 
-    private val _action = MutableSharedFlow<String>()
-    val action: SharedFlow<String> = _action
+        if (page == 0) setState { copy(loading = true) }
+        else setState { copy(paging = true) }
 
-    private fun getPokemons() = viewModelScope.launch {
         runCatching {
             withContext(Dispatchers.IO) {
-                listPokemonsUseCase()
+                listPokemonsUseCase(page, PAGE_SIZE)
             }
-        }.onSuccess {
-            println(it)
-            _state.value = it
-        }.onFailure {
-            it.printStackTrace()
+        }.onSuccess(::handleSuccess)
+            .onFailure(::handleFailure)
+        isIdle = true
+    }
+
+    private fun handleSuccess(newList: List<Pokemon>) {
+        page++
+        setState {
+            copy(
+                loading = false, paging = false,
+                pokemons = pokemons + newList.toModel(), canPaginate = newList.size == PAGE_SIZE
+            )
+        }
+    }
+
+    @SuppressWarnings("UnusedPrivateMember")
+    private fun handleFailure(throwable: Throwable) {
+        setState {
+            copy(loading = false, paging = false)
         }
     }
 }

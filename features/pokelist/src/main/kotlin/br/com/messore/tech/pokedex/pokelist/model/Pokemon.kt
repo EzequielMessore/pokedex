@@ -1,10 +1,12 @@
-package br.com.messore.tech.pokedex.domain.model
+package br.com.messore.tech.pokedex.pokelist.model
 
 typealias Url = String
 
 data class Pokemon(
     val id: Int,
-    val image: Url,
     val name: String,
+    val image: Url,
     val types: List<PokemonType>,
-)
+) {
+    val mainType = types.first()
+}
