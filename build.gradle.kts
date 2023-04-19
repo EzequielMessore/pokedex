@@ -12,7 +12,12 @@ allprojects {
             freeCompilerArgs = freeCompilerArgs + listOf(
                 "-Xopt-in=androidx.compose.material3.ExperimentalMaterial3Api",
             )
+            jvmTarget = JavaVersion.VERSION_11.toString()
         }
+    }
+    tasks.withType<JavaCompile> {
+        sourceCompatibility = JavaVersion.VERSION_11.toString()
+        targetCompatibility = JavaVersion.VERSION_11.toString()
     }
 }
 
