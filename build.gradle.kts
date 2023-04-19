@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application") version "7.4.2" apply false
+    id("com.android.application") version "8.0.0" apply false
     id("com.android.library") version "7.4.2" apply false
     id("org.jetbrains.kotlin.android") version "1.8.10" apply false
     alias(libs.plugins.detekt)
@@ -12,7 +12,12 @@ allprojects {
             freeCompilerArgs = freeCompilerArgs + listOf(
                 "-Xopt-in=androidx.compose.material3.ExperimentalMaterial3Api",
             )
+            jvmTarget = JavaVersion.VERSION_11.toString()
         }
+    }
+    tasks.withType<JavaCompile> {
+        sourceCompatibility = JavaVersion.VERSION_11.toString()
+        targetCompatibility = JavaVersion.VERSION_11.toString()
     }
 }
 
