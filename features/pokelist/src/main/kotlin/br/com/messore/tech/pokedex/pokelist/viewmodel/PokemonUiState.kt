@@ -10,4 +10,7 @@ data class PokemonUiState(
     val pokemons: List<Pokemon> = emptyList(),
 )
 
-sealed interface PokemonUiAction
+sealed interface PokemonUiAction {
+    object ShowOrder: PokemonUiAction
+    object ShowTypes : PokemonUiAction
+}

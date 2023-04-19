@@ -25,6 +25,14 @@ class PokemonViewModel @Inject constructor(
         getPokemons()
     }
 
+    fun onTypesClicked() {
+        sendAction(PokemonUiAction.ShowTypes)
+    }
+
+    fun onOrderClicked() {
+        sendAction(PokemonUiAction.ShowOrder)
+    }
+
     fun getPokemons() = viewModelScope.launch {
         if (isIdle.not()) return@launch
         isIdle = false

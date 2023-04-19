@@ -1,4 +1,4 @@
-package br.com.messore.tech.pokedex.pokelist
+package br.com.messore.tech.pokedex.pokelist.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -55,6 +55,8 @@ import coil.compose.AsyncImage
 fun PokeListScreen(
     paging: Boolean = false,
     loading: Boolean = false,
+    onTypesClicked: () -> Unit = {},
+    onOrderClicked: () -> Unit = {},
     pokemonList: List<Pokemon> = listOf(),
     listState: LazyListState = rememberLazyListState(),
 ) {
@@ -63,7 +65,10 @@ fun PokeListScreen(
     Column {
         Search()
 
-        Filters()
+        Filters(
+            onTypesBottomSheet = onTypesClicked,
+            onOrderBottomSheet = onOrderClicked,
+        )
 
         LazyColumn(
             state = listState,
@@ -121,7 +126,11 @@ fun Search() {
 const val DarkGray = 0xff333333
 
 @Composable
-fun Filters(defaultColor: Color = Color(DarkGray)) {
+fun Filters(
+    defaultColor: Color = Color(DarkGray),
+    onTypesBottomSheet: () -> Unit,
+    onOrderBottomSheet: () -> Unit,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -129,15 +138,15 @@ fun Filters(defaultColor: Color = Color(DarkGray)) {
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Button(
+            onClick = onTypesBottomSheet,
             colors = ButtonDefaults.buttonColors(containerColor = defaultColor),
-            onClick = { /*TODO*/ }
         ) {
             Text(text = "Todos os tipos")
             Icon(imageVector = Icons.Default.KeyboardArrowDown, contentDescription = null)
         }
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onOrderBottomSheet,
             colors = ButtonDefaults.buttonColors(containerColor = defaultColor),
         ) {
             Text(text = "Menor número")
