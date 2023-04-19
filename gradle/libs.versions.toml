@@ -1,6 +1,7 @@
 [versions]
 # Kotlin
 kotlin = "1.8.10"
+androidGradlePlugin = "8.0.0"
 
 # AndroidX
 androidxCore = "1.10.0"
@@ -72,6 +73,10 @@ testing-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref =
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 
 [bundles]
 compose = ["compose-activity", "compose-ui", "compose-ui-tooling-preview", "compose-material3", "compose-navigation"]
