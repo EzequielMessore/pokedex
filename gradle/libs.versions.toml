@@ -19,6 +19,7 @@ detekt = "1.22.0"
 
 # Dagger
 dagger = "2.45"
+navigationCompose = "1.0.0"
 
 # SquareUp - Retrofit
 squareup = "2.9.0"
@@ -39,6 +40,7 @@ compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeB
 compose-activity = { module = "androidx.activity:activity-compose" }
 compose-ui = { module = "androidx.compose.ui:ui" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui" }
+compose-material = { module = "androidx.compose.material:material" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
@@ -53,6 +55,7 @@ detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", 
 # Hilt
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "navigationCompose" }
 
 # Dagger
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
