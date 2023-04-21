@@ -8,7 +8,7 @@ androidxCore = "1.10.0"
 androidxLifecycleRuntimeKtx = "2.6.1"
 
 # Compose
-composeBom = "2023.04.00"
+composeBom = "2023.04.01"
 composeCompiler = "1.4.0"
 composeNavigation = "2.5.3"
 
