@@ -23,7 +23,7 @@ dagger = "2.45"
 
 # SquareUp - Retrofit
 squareup = "2.9.0"
-loggingInterceptor = "4.10.0"
+loggingInterceptor = "4.11.0"
 
 # Testing
 junitExt = "1.1.5"
