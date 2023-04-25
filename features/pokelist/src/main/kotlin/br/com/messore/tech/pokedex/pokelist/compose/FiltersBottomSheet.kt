@@ -1,6 +1,7 @@
 package br.com.messore.tech.pokedex.pokelist.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,9 +29,12 @@ import androidx.compose.ui.unit.sp
 import br.com.messore.tech.pokedex.domain.model.PokemonType
 import br.com.messore.tech.pokedex.pokelist.R
 import br.com.messore.tech.pokedex.pokelist.mapper.toModel
+import br.com.messore.tech.pokedex.pokelist.model.PokemonType as PokemonTypeModel
 
 @Composable
-internal fun FiltersBottomSheet() {
+internal fun FiltersBottomSheet(
+    onTypeClicked: (PokemonTypeModel?) -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,21 +59,30 @@ internal fun FiltersBottomSheet() {
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
-                Type(text = R.string.type_all, color = Color.Black)
+                Type(
+                    text = R.string.type_all,
+                    color = Color.Black,
+                    onTypeClicked = { onTypeClicked(null) }
+                )
             }
             items(pokemonTypes) { type ->
-                Type(type.text, type.color)
+                Type(
+                    text = type.text,
+                    color = type.color,
+                    onTypeClicked = { onTypeClicked(type) }
+                )
             }
         }
     }
 }
 
 @Composable
-private fun Type(text: Int, color: Color) {
+fun Type(text: Int, color: Color, onTypeClicked: () -> Unit = {}) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(42.dp)
+            .clickable(onClick = onTypeClicked)
             .background(color, shape = RoundedCornerShape(49.dp)),
     ) {
         Text(

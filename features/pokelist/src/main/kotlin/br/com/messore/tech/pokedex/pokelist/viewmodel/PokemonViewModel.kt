@@ -5,6 +5,7 @@ import br.com.messore.tech.pokedex.domain.model.Pokemon
 import br.com.messore.tech.pokedex.domain.usecase.ListPokemonsUseCase
 import br.com.messore.tech.pokedex.pokelist.BaseViewModel
 import br.com.messore.tech.pokedex.pokelist.mapper.toModel
+import br.com.messore.tech.pokedex.pokelist.model.PokemonType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +30,11 @@ class PokemonViewModel @Inject constructor(
         sendAction(PokemonUiAction.ShowTypes)
     }
 
+    fun onTypeSelected(type: PokemonType?) {
+        setState { copy(selectedType = type) }
+        refreshResult()
+    }
+
     fun onOrderClicked() {
         sendAction(PokemonUiAction.ShowOrder)
     }
@@ -42,11 +48,17 @@ class PokemonViewModel @Inject constructor(
 
         runCatching {
             withContext(Dispatchers.IO) {
-                listPokemonsUseCase(page, PAGE_SIZE)
+                listPokemonsUseCase(page, PAGE_SIZE, stateValue.selectedType?.originalType)
             }
         }.onSuccess(::handleSuccess)
             .onFailure(::handleFailure)
         isIdle = true
+    }
+
+    private fun refreshResult() {
+        page = 0
+        setState { copy(pokemons = emptyList()) }
+        getPokemons()
     }
 
     private fun handleSuccess(newList: List<Pokemon>) {

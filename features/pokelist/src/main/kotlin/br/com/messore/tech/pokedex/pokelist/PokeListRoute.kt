@@ -55,6 +55,7 @@ fun PokeListRoute(viewModel: PokemonViewModel = hiltViewModel()) {
             paging = state.paging,
             loading = state.loading,
             pokemonList = state.pokemons,
+            selectedType = state.selectedType,
             onTypesClicked = viewModel::onTypesClicked,
             onOrderClicked = viewModel::onOrderClicked,
         )
@@ -79,7 +80,10 @@ private fun ObserveActions(
             PokemonUiAction.ShowTypes -> {
                 scope.launch { bottomSheetState.show() }
                 bottomSheetContent.value = {
-                    FiltersBottomSheet()
+                    FiltersBottomSheet {
+                        scope.launch { bottomSheetState.hide() }
+                        viewModel.onTypeSelected(it)
+                    }
                 }
             }
 

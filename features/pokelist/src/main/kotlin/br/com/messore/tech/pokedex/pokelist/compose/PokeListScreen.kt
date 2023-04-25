@@ -44,9 +44,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.messore.tech.pokedex.pokelist.R
 import br.com.messore.tech.pokedex.pokelist.model.Pokemon
 import br.com.messore.tech.pokedex.pokelist.model.PokemonType
 import coil.compose.AsyncImage
@@ -57,6 +59,7 @@ fun PokeListScreen(
     loading: Boolean = false,
     onTypesClicked: () -> Unit = {},
     onOrderClicked: () -> Unit = {},
+    selectedType: PokemonType? = null,
     pokemonList: List<Pokemon> = listOf(),
     listState: LazyListState = rememberLazyListState(),
 ) {
@@ -66,6 +69,7 @@ fun PokeListScreen(
         Search()
 
         Filters(
+            selectedType = selectedType,
             onTypesBottomSheet = onTypesClicked,
             onOrderBottomSheet = onOrderClicked,
         )
@@ -128,6 +132,7 @@ const val DarkGray = 0xff333333
 @Composable
 fun Filters(
     defaultColor: Color = Color(DarkGray),
+    selectedType: PokemonType? = null,
     onTypesBottomSheet: () -> Unit,
     onOrderBottomSheet: () -> Unit,
 ) {
@@ -139,18 +144,48 @@ fun Filters(
     ) {
         Button(
             onClick = onTypesBottomSheet,
-            colors = ButtonDefaults.buttonColors(containerColor = defaultColor),
+            modifier = Modifier.weight(0.5f),
+            colors = ButtonDefaults.buttonColors(containerColor = selectedType?.color ?: defaultColor),
         ) {
-            Text(text = "Todos os tipos")
-            Icon(imageVector = Icons.Default.KeyboardArrowDown, contentDescription = null)
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(end = 16.dp),
+                    text = stringResource(id = selectedType?.text ?: R.string.type_all),
+                )
+
+                Icon(
+                    contentDescription = null,
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    modifier = Modifier.align(Alignment.CenterEnd),
+                )
+            }
         }
+
+        Spacer(modifier = Modifier.width(16.dp))
 
         Button(
             onClick = onOrderBottomSheet,
+            modifier = Modifier.weight(0.5f),
             colors = ButtonDefaults.buttonColors(containerColor = defaultColor),
         ) {
-            Text(text = "Menor número")
-            Icon(imageVector = Icons.Default.KeyboardArrowDown, contentDescription = null)
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "Menor número",
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(end = 16.dp),
+                    textAlign = TextAlign.Center,
+                )
+
+                Icon(
+                    contentDescription = null,
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    modifier = Modifier.align(Alignment.CenterEnd),
+                )
+            }
         }
     }
 }
