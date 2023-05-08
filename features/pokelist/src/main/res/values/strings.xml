@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="choose_type">Select the type</string>
+    <string name="type_all">All types</string>
     <string name="type_normal">Normal</string>
     <string name="type_fire">Fire</string>
     <string name="type_water">Water</string>

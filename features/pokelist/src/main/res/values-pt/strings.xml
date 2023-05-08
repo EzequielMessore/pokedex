@@ -20,4 +20,6 @@
     <string name="type_fairy">Fada</string>
     <string name="type_unknown">Desconhecido</string>
     <string name="type_shadow">Sombra</string>
+    <string name="type_all">Todos os tipos</string>
+    <string name="choose_type">Selecione o tipo</string>
 </resources>

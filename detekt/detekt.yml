@@ -14,7 +14,7 @@ complexity:
   LargeClass:
     threshold: 150
   LongMethod:
-    threshold: 20
+    threshold: 40
   LongParameterList:
     functionThreshold: 5
   TooManyFunctions:

@@ -57,6 +57,8 @@ dependencies {
 
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
+    implementation(libs.compose.material)
+    implementation(libs.hilt.navigation.compose)
 
     debugImplementation(libs.bundles.debug.compose)
 
