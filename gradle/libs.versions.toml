@@ -28,7 +28,6 @@ loggingInterceptor = "4.11.0"
 # Testing
 junitExt = "1.1.5"
 expresso = "3.5.1"
-testingCompose = "1.4.1"
 
 [libraries]
 # AndroidX
@@ -68,7 +67,7 @@ squareup-logging-interceptor = { module = "com.squareup.okhttp3:logging-intercep
 testing-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 testing-junit-ext = { module = "androidx.test.ext:junit", version.ref = "junitExt" }
 testing-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "expresso" }
-testing-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "testingCompose" }
+testing-compose = { module = "androidx.compose.ui:ui-test-junit4" }
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
