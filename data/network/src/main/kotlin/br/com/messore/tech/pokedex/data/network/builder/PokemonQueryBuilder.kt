@@ -17,6 +17,10 @@ class PokemonQueryBuilder(
         map["where"] = "{${where ?: ""}}"
     }
 
+    fun sort(sort: String?) = apply {
+        map["order_by"] = "{${sort ?: ""}}"
+    }
+
     fun build(): String {
         val clause = map.entries.joinToString(", ") { "${it.key}: ${it.value}" }
 
