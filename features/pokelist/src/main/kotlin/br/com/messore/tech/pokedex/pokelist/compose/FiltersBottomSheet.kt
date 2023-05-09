@@ -1,9 +1,7 @@
 package br.com.messore.tech.pokedex.pokelist.compose
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,10 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -73,24 +69,6 @@ internal fun FiltersBottomSheet(
                 )
             }
         }
-    }
-}
-
-@Composable
-fun Type(text: Int, color: Color, onTypeClicked: () -> Unit = {}) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(42.dp)
-            .clickable(onClick = onTypeClicked)
-            .background(color, shape = RoundedCornerShape(49.dp)),
-    ) {
-        Text(
-            modifier = Modifier.align(Center),
-            text = stringResource(id = text),
-            color = Color.White,
-            style = TextStyle(fontWeight = FontWeight.W600),
-        )
     }
 }
 

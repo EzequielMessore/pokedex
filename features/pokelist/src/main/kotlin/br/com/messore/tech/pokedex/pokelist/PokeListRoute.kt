@@ -18,8 +18,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.messore.tech.pokedex.pokelist.compose.FiltersBottomSheet
-import br.com.messore.tech.pokedex.pokelist.compose.OrderBottomSheet
 import br.com.messore.tech.pokedex.pokelist.compose.PokeListScreen
+import br.com.messore.tech.pokedex.pokelist.compose.SortBottomSheet
 import br.com.messore.tech.pokedex.pokelist.extensions.observe
 import br.com.messore.tech.pokedex.pokelist.viewmodel.PokemonUiAction
 import br.com.messore.tech.pokedex.pokelist.viewmodel.PokemonViewModel
@@ -56,8 +56,9 @@ fun PokeListRoute(viewModel: PokemonViewModel = hiltViewModel()) {
             loading = state.loading,
             pokemonList = state.pokemons,
             selectedType = state.selectedType,
+            selectedSort = state.selectedSort,
             onTypesClicked = viewModel::onTypesClicked,
-            onOrderClicked = viewModel::onOrderClicked,
+            onOrderClicked = viewModel::onSortClicked,
         )
     }
 
@@ -87,10 +88,13 @@ private fun ObserveActions(
                 }
             }
 
-            PokemonUiAction.ShowOrder -> {
+            PokemonUiAction.ShowSort -> {
                 scope.launch { bottomSheetState.show() }
                 bottomSheetContent.value = {
-                    OrderBottomSheet()
+                    SortBottomSheet {
+                        scope.launch { bottomSheetState.hide() }
+                        viewModel.onSortSelected(it)
+                    }
                 }
             }
         }
