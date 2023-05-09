@@ -22,4 +22,8 @@
     <string name="type_shadow">Sombra</string>
     <string name="type_all">Todos os tipos</string>
     <string name="choose_type">Selecione o tipo</string>
+    <string name="choose_sort">Selecione a ordem</string>
+    <string name="lower_number">Menor número</string>
+    <string name="higher_number">Maior número</string>
+    <string name="sort_default">@string/lower_number</string>
 </resources>
