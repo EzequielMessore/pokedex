@@ -48,7 +48,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.messore.tech.pokedex.domain.model.PokemonSort
 import br.com.messore.tech.pokedex.pokelist.R
+import br.com.messore.tech.pokedex.pokelist.mapper.toModel
 import br.com.messore.tech.pokedex.pokelist.model.Pokemon
 import br.com.messore.tech.pokedex.pokelist.model.PokemonType
 import coil.compose.AsyncImage
@@ -60,6 +62,7 @@ fun PokeListScreen(
     onTypesClicked: () -> Unit = {},
     onOrderClicked: () -> Unit = {},
     selectedType: PokemonType? = null,
+    selectedSort: PokemonSort? = null,
     pokemonList: List<Pokemon> = listOf(),
     listState: LazyListState = rememberLazyListState(),
 ) {
@@ -70,6 +73,7 @@ fun PokeListScreen(
 
         Filters(
             selectedType = selectedType,
+            selectedSort = selectedSort,
             onTypesBottomSheet = onTypesClicked,
             onOrderBottomSheet = onOrderClicked,
         )
@@ -133,6 +137,7 @@ const val DarkGray = 0xff333333
 fun Filters(
     defaultColor: Color = Color(DarkGray),
     selectedType: PokemonType? = null,
+    selectedSort: PokemonSort? = null,
     onTypesBottomSheet: () -> Unit,
     onOrderBottomSheet: () -> Unit,
 ) {
@@ -173,7 +178,7 @@ fun Filters(
         ) {
             Box(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    text = "Menor número",
+                    text = stringResource(id = selectedSort?.toModel() ?: R.string.sort_default),
                     modifier = Modifier
                         .align(Alignment.Center)
                         .padding(end = 16.dp),

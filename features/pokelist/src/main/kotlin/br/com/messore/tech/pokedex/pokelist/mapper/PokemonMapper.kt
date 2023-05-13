@@ -1,5 +1,7 @@
 package br.com.messore.tech.pokedex.pokelist.mapper
 
+import br.com.messore.tech.pokedex.domain.model.PokemonSort
+import br.com.messore.tech.pokedex.pokelist.R
 import br.com.messore.tech.pokedex.pokelist.model.Pokemon
 import br.com.messore.tech.pokedex.pokelist.model.PokemonType
 import br.com.messore.tech.pokedex.domain.model.Pokemon as PokemonDomain
@@ -37,4 +39,11 @@ fun PokemonTypeDomain.toModel(): PokemonType {
         PokemonTypeDomain.STEEL -> PokemonType.Steel
         PokemonTypeDomain.FAIRY -> PokemonType.Fairy
     }
+}
+
+fun PokemonSort.toModel(): Int = when (this) {
+    PokemonSort.NAME_ASC -> R.string.lower_name
+    PokemonSort.NAME_DESC -> R.string.higher_name
+    PokemonSort.NUMBER_ASC -> R.string.lower_number
+    PokemonSort.NUMBER_DESC -> R.string.higher_number
 }

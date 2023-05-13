@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="choose_type">Select the type</string>
+    <string name="choose_sort">Select the sort</string>
     <string name="type_all">All types</string>
     <string name="type_normal">Normal</string>
     <string name="type_fire">Fire</string>
@@ -22,4 +23,9 @@
     <string name="type_fairy">Fairy</string>
     <string name="type_unknown">Unknown</string>
     <string name="type_shadow">Shadow</string>
+    <string name="lower_number">Menor número</string>
+    <string name="sort_default">@string/lower_number</string>
+    <string name="higher_number">Maior número</string>
+    <string name="lower_name" translatable="false">A-Z</string>
+    <string name="higher_name" translatable="false">Z-A</string>
 </resources>

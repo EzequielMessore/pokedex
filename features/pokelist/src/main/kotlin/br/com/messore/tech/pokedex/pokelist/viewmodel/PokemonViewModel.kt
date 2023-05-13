@@ -2,6 +2,7 @@ package br.com.messore.tech.pokedex.pokelist.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import br.com.messore.tech.pokedex.domain.model.Pokemon
+import br.com.messore.tech.pokedex.domain.model.PokemonSort
 import br.com.messore.tech.pokedex.domain.usecase.ListPokemonsUseCase
 import br.com.messore.tech.pokedex.pokelist.BaseViewModel
 import br.com.messore.tech.pokedex.pokelist.mapper.toModel
@@ -35,8 +36,13 @@ class PokemonViewModel @Inject constructor(
         refreshResult()
     }
 
-    fun onOrderClicked() {
-        sendAction(PokemonUiAction.ShowOrder)
+    fun onSortClicked() {
+        sendAction(PokemonUiAction.ShowSort)
+    }
+
+    fun onSortSelected(sort: PokemonSort) {
+        setState { copy(selectedSort = sort) }
+        refreshResult()
     }
 
     fun getPokemons() = viewModelScope.launch {
@@ -48,7 +54,7 @@ class PokemonViewModel @Inject constructor(
 
         runCatching {
             withContext(Dispatchers.IO) {
-                listPokemonsUseCase(page, PAGE_SIZE, stateValue.selectedType?.originalType)
+                listPokemonsUseCase(page, PAGE_SIZE, stateValue.selectedType?.originalType, stateValue.selectedSort)
             }
         }.onSuccess(::handleSuccess)
             .onFailure(::handleFailure)
