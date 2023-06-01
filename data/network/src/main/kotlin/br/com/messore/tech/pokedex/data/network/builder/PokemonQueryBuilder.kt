@@ -29,14 +29,12 @@ class PokemonQueryBuilder {
     }
 
     fun build(): String {
-        val clause = map.entries
-            .map { (key, value) ->
-                when (value) {
-                    is List<*> -> value.joinToString(prefix = "where: {", postfix = "}") { "$it" }
-                    else -> "${key}: $value"
-                }
+        val clause = map.entries.joinToString(", ") { (key, value) ->
+            when (value) {
+                is List<*> -> value.joinToString(prefix = "where: {", postfix = "}") { "$it" }
+                else -> "$key: $value"
             }
-            .joinToString(", ")
+        }
 
         return """
             query (${'$'}term: String = "%%") {

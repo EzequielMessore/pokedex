@@ -32,7 +32,7 @@ class PokemonRemoteDataSource @Inject constructor(
                 .sort(sort?.toRemote())
                 .build(),
             variables = mapOf(
-                "term" to term?.let { "%${it}%" }
+                "term" to term?.let { "%$it%" }
             )
         )
         return service.post(request).toDomain()
