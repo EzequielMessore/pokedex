@@ -16,4 +16,6 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
     implementation(libs.bundles.network)
+
+    testImplementation(libs.bundles.testing)
 }
