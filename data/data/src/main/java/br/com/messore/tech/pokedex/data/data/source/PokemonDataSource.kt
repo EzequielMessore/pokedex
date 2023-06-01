@@ -6,6 +6,12 @@ import br.com.messore.tech.pokedex.domain.model.PokemonType
 
 sealed interface PokemonDataSource {
     interface Remote : PokemonDataSource {
-        suspend fun getPokemons(page: Int, pageSize: Int, type: PokemonType?, sort: PokemonSort?): List<Pokemon>
+        suspend fun getPokemons(
+            page: Int,
+            term: String?,
+            pageSize: Int,
+            type: PokemonType?,
+            sort: PokemonSort?,
+        ): List<Pokemon>
     }
 }

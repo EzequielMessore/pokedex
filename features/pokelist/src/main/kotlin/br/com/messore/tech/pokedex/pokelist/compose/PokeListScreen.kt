@@ -21,6 +21,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.Search
@@ -31,28 +33,31 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.messore.tech.pokedex.domain.model.PokemonSort
 import br.com.messore.tech.pokedex.pokelist.R
 import br.com.messore.tech.pokedex.pokelist.mapper.toModel
 import br.com.messore.tech.pokedex.pokelist.model.Pokemon
 import br.com.messore.tech.pokedex.pokelist.model.PokemonType
+import br.com.messore.tech.pokedex.pokelist.viewmodel.PokemonViewModel
 import coil.compose.AsyncImage
 
 @Composable
@@ -110,14 +115,16 @@ fun ScreenLoading(show: Boolean = false) {
 }
 
 @Composable
-fun Search() {
-    var text by rememberSaveable { mutableStateOf("") }
+@OptIn(ExperimentalComposeUiApi::class)
+fun Search(viewModel: PokemonViewModel = hiltViewModel()) {
+    val state by viewModel.state.collectAsState()
+    val keyboardCtrl = LocalSoftwareKeyboardController.current
 
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        value = text,
+        value = state.searchTerm,
         placeholder = { Text(text = "Procurar Pókemon...") },
         leadingIcon = {
             Icon(
@@ -126,8 +133,13 @@ fun Search() {
                 contentDescription = null
             )
         },
-        onValueChange = { text = it },
-        shape = CircleShape
+        onValueChange = viewModel::onSearchChanged,
+        shape = CircleShape,
+        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
+        keyboardActions = KeyboardActions(onSearch = {
+            viewModel.onSearch()
+            keyboardCtrl?.hide()
+        })
     )
 }
 
@@ -290,7 +302,14 @@ fun PokeImage(pokemon: Pokemon, modifier: Modifier) {
     Box(
         modifier = modifier
             .aspectRatio(1f)
-            .background(brush = Brush.linearGradient(listOf(Color.Transparent, pokemon.mainType.color))),
+            .background(
+                brush = Brush.linearGradient(
+                    listOf(
+                        Color.Transparent,
+                        pokemon.mainType.color
+                    )
+                )
+            ),
     )
     AsyncImage(
         modifier = modifier.fillMaxSize(),

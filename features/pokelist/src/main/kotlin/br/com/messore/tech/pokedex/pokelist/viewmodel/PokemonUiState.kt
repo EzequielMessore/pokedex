@@ -5,6 +5,7 @@ import br.com.messore.tech.pokedex.pokelist.model.Pokemon
 import br.com.messore.tech.pokedex.pokelist.model.PokemonType
 
 data class PokemonUiState(
+    val searchTerm: String = "",
     val idle: Boolean = false,
     val paging: Boolean = false,
     val loading: Boolean = false,

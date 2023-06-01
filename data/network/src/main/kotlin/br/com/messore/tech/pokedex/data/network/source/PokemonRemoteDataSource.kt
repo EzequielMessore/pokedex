@@ -11,15 +11,19 @@ import br.com.messore.tech.pokedex.domain.model.PokemonSort
 import br.com.messore.tech.pokedex.domain.model.PokemonType
 import javax.inject.Inject
 
-private const val OPERATION_NAME = "pokemonsWithTypes"
-
 class PokemonRemoteDataSource @Inject constructor(
-    private val service: PokemonService
+    private val service: PokemonService,
 ) : PokemonDataSource.Remote {
 
-    override suspend fun getPokemons(page: Int, pageSize: Int, type: PokemonType?, sort: PokemonSort?): List<Pokemon> {
+    override suspend fun getPokemons(
+        page: Int,
+        term: String?,
+        pageSize: Int,
+        type: PokemonType?,
+        sort: PokemonSort?,
+    ): List<Pokemon> {
         val request = GraphQLRequest(
-            query = PokemonQueryBuilder(OPERATION_NAME)
+            query = PokemonQueryBuilder()
                 .limit(pageSize)
                 .offset(pageSize * page)
                 .where(type?.let {
@@ -27,7 +31,9 @@ class PokemonRemoteDataSource @Inject constructor(
                 })
                 .sort(sort?.toRemote())
                 .build(),
-            operationName = OPERATION_NAME,
+            variables = mapOf(
+                "term" to term?.let { "%${it}%" }
+            )
         )
         return service.post(request).toDomain()
     }
