@@ -10,6 +10,9 @@ branches:
   - label: bug
     name: main
     prefix: fix/
+  - label: spike
+    name: main
+    prefix: spike
 openDraftPR: true
 copyIssueDescriptionToPR: true
 copyIssueLabelsToPR: true
