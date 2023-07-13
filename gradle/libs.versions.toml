@@ -29,6 +29,8 @@ loggingInterceptor = "4.11.0"
 # Testing
 junitExt = "1.1.5"
 expresso = "3.5.1"
+mockk = "1.13.5"
+coroutines = "1.6.4"
 
 [libraries]
 # AndroidX
@@ -71,6 +73,9 @@ testing-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref
 testing-junit-ext = { module = "androidx.test.ext:junit", version.ref = "junitExt" }
 testing-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "expresso" }
 testing-compose = { module = "androidx.compose.ui:ui-test-junit4" }
+testing-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+testing-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+testing-mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
@@ -84,4 +89,5 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 compose = ["compose-activity", "compose-ui", "compose-ui-tooling-preview", "compose-material3", "compose-navigation"]
 debug-compose = ["compose-ui-tooling", "compose-ui-test-manifest"]
 network = ["squareup-retrofit", "squareup-gson-converter", "squareup-logging-interceptor"]
+testing = ["testing-mockk", "testing-kotlin-test", "testing-coroutines"]
 

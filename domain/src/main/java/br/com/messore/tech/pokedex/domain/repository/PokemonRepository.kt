@@ -5,5 +5,11 @@ import br.com.messore.tech.pokedex.domain.model.PokemonSort
 import br.com.messore.tech.pokedex.domain.model.PokemonType
 
 interface PokemonRepository {
-    suspend fun getPokemons(page: Int, pageSize: Int, type: PokemonType?, sort: PokemonSort?): List<Pokemon>
+    suspend fun getPokemons(
+        page: Int,
+        term: String?,
+        pageSize: Int,
+        type: PokemonType?,
+        sort: PokemonSort?,
+    ): List<Pokemon>
 }

@@ -17,7 +17,7 @@ private const val PAGE_SIZE = 20
 
 @HiltViewModel
 class PokemonViewModel @Inject constructor(
-    private val listPokemonsUseCase: ListPokemonsUseCase
+    private val listPokemonsUseCase: ListPokemonsUseCase,
 ) : BaseViewModel<PokemonUiState, PokemonUiAction>(PokemonUiState()) {
 
     private var page = 0
@@ -45,6 +45,16 @@ class PokemonViewModel @Inject constructor(
         refreshResult()
     }
 
+    fun onSearch() {
+        refreshResult()
+    }
+
+    fun onSearchChanged(term: String) {
+        setState {
+            copy(searchTerm = term)
+        }
+    }
+
     fun getPokemons() = viewModelScope.launch {
         if (isIdle.not()) return@launch
         isIdle = false
@@ -54,7 +64,13 @@ class PokemonViewModel @Inject constructor(
 
         runCatching {
             withContext(Dispatchers.IO) {
-                listPokemonsUseCase(page, PAGE_SIZE, stateValue.selectedType?.originalType, stateValue.selectedSort)
+                listPokemonsUseCase(
+                    page,
+                    stateValue.searchTerm,
+                    PAGE_SIZE,
+                    stateValue.selectedType?.originalType,
+                    stateValue.selectedSort,
+                )
             }
         }.onSuccess(::handleSuccess)
             .onFailure(::handleFailure)

@@ -11,8 +11,9 @@ class ListPokemonsUseCase @Inject constructor(
 
     suspend operator fun invoke(
         page: Int,
+        term: String,
         pageSize: Int,
         type: PokemonType? = null,
         sort: PokemonSort? = null,
-    ) = repository.getPokemons(page, pageSize, type, sort)
+    ) = repository.getPokemons(page, term.ifEmpty { null }, pageSize, type, sort)
 }

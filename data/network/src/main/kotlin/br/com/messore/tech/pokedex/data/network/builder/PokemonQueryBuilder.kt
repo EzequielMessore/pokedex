@@ -1,9 +1,12 @@
 package br.com.messore.tech.pokedex.data.network.builder
 
-class PokemonQueryBuilder(
-    private val operationName: String,
-) {
-    private val map = mutableMapOf<String, Any>("offset" to 0)
+class PokemonQueryBuilder {
+    private val map = mutableMapOf(
+        "offset" to 0,
+        "where" to mutableListOf(
+            "name: {_ilike: \$term}"
+        )
+    )
 
     fun limit(limit: Int) = apply {
         map["limit"] = limit
@@ -13,8 +16,12 @@ class PokemonQueryBuilder(
         map["offset"] = offset
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun where(where: String?) = apply {
-        map["where"] = "{${where ?: ""}}"
+        if (where == null) return@apply
+
+        val whereList = map["where"] as MutableList<String>
+        whereList.add(where)
     }
 
     fun sort(sort: String?) = apply {
@@ -22,11 +29,26 @@ class PokemonQueryBuilder(
     }
 
     fun build(): String {
-        val clause = map.entries.joinToString(", ") { "${it.key}: ${it.value}" }
+        val clause = map.entries.joinToString(", ") { (key, value) ->
+            when (value) {
+                is List<*> -> value.joinToString(prefix = "where: {", postfix = "}") { "$it" }
+                else -> "$key: $value"
+            }
+        }
 
         return """
-            query $operationName {pokemon: pokemon_v2_pokemon($clause)
-            {id,name,types: pokemon_v2_pokemontypes(order_by: {slot: asc}) {type: pokemon_v2_type {id,name}}}}
+            query (${'$'}term: String = "%%") {
+              pokemon: pokemon_v2_pokemon($clause) {
+                id
+                name
+                types: pokemon_v2_pokemontypes(order_by: {slot: asc}) {
+                  type: pokemon_v2_type {
+                    id
+                    name
+                  }
+                }
+              }
+            }
         """.trimIndent()
     }
 }

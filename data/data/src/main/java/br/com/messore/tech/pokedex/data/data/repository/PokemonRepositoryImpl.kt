@@ -10,7 +10,13 @@ import javax.inject.Inject
 class PokemonRepositoryImpl @Inject constructor(
     private val remoteDataSource: PokemonDataSource.Remote
 ) : PokemonRepository {
-    override suspend fun getPokemons(page: Int, pageSize: Int, type: PokemonType?, sort: PokemonSort?): List<Pokemon> {
-        return remoteDataSource.getPokemons(page, pageSize, type, sort)
+    override suspend fun getPokemons(
+        page: Int,
+        term: String?,
+        pageSize: Int,
+        type: PokemonType?,
+        sort: PokemonSort?,
+    ): List<Pokemon> {
+        return remoteDataSource.getPokemons(page, term, pageSize, type, sort)
     }
 }
