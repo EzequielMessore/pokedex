@@ -19,7 +19,7 @@ coil = "2.4.0"
 detekt = "1.23.0"
 
 # Dagger
-dagger = "2.46.1"
+dagger = "2.47"
 navigationCompose = "1.0.0"
 
 # SquareUp - Retrofit
