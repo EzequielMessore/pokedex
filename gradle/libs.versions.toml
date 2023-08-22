@@ -30,7 +30,7 @@ loggingInterceptor = "4.11.0"
 junitExt = "1.1.5"
 expresso = "3.5.1"
 mockk = "1.13.7"
-coroutines = "1.7.2"
+coroutines = "1.7.3"
 
 [libraries]
 # AndroidX
