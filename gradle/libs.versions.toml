@@ -10,7 +10,7 @@ androidxLifecycleRuntimeKtx = "2.6.1"
 # Compose
 composeBom = "2023.09.00"
 composeCompiler = "1.4.0"
-composeNavigation = "2.7.0"
+composeNavigation = "2.7.2"
 
 # Coil
 coil = "2.4.0"
