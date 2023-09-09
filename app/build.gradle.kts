@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "br.com.messore.tech.pokedex"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "br.com.messore.tech.pokedex"
         minSdk = 26
-        targetSdk = 33
+
         versionCode = 1
         versionName = "1.0"
 
@@ -50,7 +50,7 @@ android {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -74,6 +74,8 @@ dependencies {
     debugImplementation(libs.bundles.debug.compose)
 
     testImplementation(libs.testing.kotlin.test)
+
+    androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.testing.junit.ext)
     androidTestImplementation(libs.testing.espresso)
     androidTestImplementation(libs.testing.compose)
