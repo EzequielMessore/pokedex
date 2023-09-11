@@ -16,6 +16,6 @@ data class PokemonUiState(
 )
 
 sealed interface PokemonUiAction {
-    object ShowSort: PokemonUiAction
-    object ShowTypes : PokemonUiAction
+    data object ShowSort: PokemonUiAction
+    data object ShowTypes : PokemonUiAction
 }

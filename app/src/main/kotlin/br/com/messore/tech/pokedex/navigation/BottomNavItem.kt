@@ -8,28 +8,28 @@ sealed class BottomNavItem(
     val route: String,
     val unselectedIcon: Int,
 ) {
-    object Pokedex : BottomNavItem(
+    data object Pokedex : BottomNavItem(
         title = "Pokédex",
         route = "pokedex",
         icon = R.drawable.ic_pokeball,
         unselectedIcon = R.drawable.ic_pokeball_unselected
     )
 
-    object Regions : BottomNavItem(
+    data object Regions : BottomNavItem(
         title = "Regiões",
         route = "regions",
         icon = R.drawable.ic_regions,
         unselectedIcon = R.drawable.ic_regions_unselected
     )
 
-    object Favorite : BottomNavItem(
+    data object Favorite : BottomNavItem(
         title = "Favoritos",
         route = "favorite",
         icon = R.drawable.ic_favorite,
         unselectedIcon = R.drawable.ic_favorite_unselected
     )
 
-    object Profile : BottomNavItem(
+    data object Profile : BottomNavItem(
         title = "Conta",
         route = "profile",
         icon = R.drawable.ic_profile,
