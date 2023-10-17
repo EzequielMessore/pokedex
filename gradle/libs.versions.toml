@@ -24,7 +24,7 @@ navigationCompose = "1.0.0"
 
 # SquareUp - Retrofit
 squareup = "2.9.0"
-loggingInterceptor = "4.11.0"
+loggingInterceptor = "4.12.0"
 
 # Testing
 junitExt = "1.1.5"
