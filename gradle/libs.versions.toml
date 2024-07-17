@@ -13,7 +13,7 @@ composeCompiler = "1.4.0"
 composeNavigation = "2.7.2"
 
 # Coil
-coil = "2.4.0"
+coil = "2.7.0"
 
 # Detekt
 detekt = "1.23.1"
