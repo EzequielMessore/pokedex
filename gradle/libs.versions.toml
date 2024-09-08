@@ -16,7 +16,7 @@ composeNavigation = "2.7.2"
 coil = "2.4.0"
 
 # Detekt
-detekt = "1.23.1"
+detekt = "1.23.7"
 
 # Dagger
 dagger = "2.48"
