@@ -29,7 +29,7 @@ loggingInterceptor = "4.11.0"
 # Testing
 junitExt = "1.1.5"
 expresso = "3.5.1"
-mockk = "1.13.7"
+mockk = "1.13.13"
 coroutines = "1.7.3"
 
 [libraries]
